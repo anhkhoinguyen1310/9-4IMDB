@@ -6,7 +6,7 @@ const getAll = () => async (dispatch) => {
   try {
     dispatch({ type: types.FETCH_START });
     const { data } = await api.get("/movies");
-    dispatch({ type: types.FETCH_SUCCESS, payload: data });
+    dispatch({ type: types.FETCH_SUCCESS, payload: data.data.movies });
   } catch (error) {
     dispatch({ type: types.FETCH_FAILURE });
     console.log({ error });

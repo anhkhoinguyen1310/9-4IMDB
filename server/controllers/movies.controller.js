@@ -4,29 +4,30 @@ const {
     sendResponse,
   } = require("../helpers/utils.helper");
   
-  const userController = {};
-  const User = require("../models/User")
+  const movieController = {};
+  const Movie = require("../models/Movie")
+  
+  movieController.create = catchAsync(async (req, res, next) => {
+  });
   
   //catch Async do try catch in every function see in helpers
-  userController.create =  catchAsync(async (req, res, next) => {
-  const user = await new User({ ...req.body})
-  await user.save() //no save no shown info in database
-  const accessToken = await user.generateToken();
-  //check the helper to see the sendRespónes 
-  sendResponse(res,201,true, {user, accessToken}, null, "Create User Successfully")
+  movieController.list =  catchAsync(async (req, res, next) => {
+  const movies = await Movie.find({}).limit(20) 
+  sendResponse(res,201,true, {movies}, null, "Here are your movies")
   });
   
-  userController.list = catchAsync(async (req, res, next) => {
+  movieController.searchByTilte = catchAsync(async (req, res, next) => {
+    const movies = await Movie.find({}).limit(50) 
+  sendResponse(res,201,true, {movies}, null, "Here are your movies")
+  
+  });
+  movieController.update = catchAsync(async (req, res, next) => {
   
   });
   
-  userController.update = catchAsync(async (req, res, next) => {
-  
-  });
-  
-  userController.delete = catchAsync(async (req, res, next) => {
+  movieController.delete = catchAsync(async (req, res, next) => {
    
   });
   
-  module.exports = userController;
+  module.exports = movieController;
    
